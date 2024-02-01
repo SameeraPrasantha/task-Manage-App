@@ -1,0 +1,15 @@
+{
+  "name": "taskmanagingapp",
+  "description": "task management app using Laravel and React Redux",
+  "authors": "sameera",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "yarn": "^1.22.21"
+  },
+  "scripts": {
+    "install:app": "concurrently \"cd backend && composer install\" \"cd frontend && npm install\"",
+    "start": "concurrently \"cd backend && php artisan serve\" \"cd frontend && npm run start\""
+  }
+}

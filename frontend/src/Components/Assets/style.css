@@ -1,0 +1,30 @@
+.card-size{
+    width: 50rem;
+    margin: 10px;
+}
+
+.b-color{
+    background-color: #06C258;
+    color: white;
+}
+
+.b-color:hover{
+    background-color: #06C258;
+    color: white;
+    cursor: pointer;
+}
+
+.card-color-bg{
+    background-color: #059142;
+    color: white;
+}
+
+.card-color-bg-important{
+    background-color: #c2ad21;
+    color: white;
+}
+
+.card-color-bg-inProgress{
+    background-color: #20ae73;
+    color: white;
+}
