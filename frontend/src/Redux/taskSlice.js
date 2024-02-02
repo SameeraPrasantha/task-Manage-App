@@ -12,6 +12,36 @@ export const fetchTasks = async () => {
   }
 };
 
+export const saveTask = async (taskData, editingTask, onTaskSaved, handleClose) => {
+  try {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    const apiUrl = editingTask ? `http://127.0.0.1:8000/api/tasks/${editingTask.id}` : 'http://127.0.0.1:8000/api/tasks';
+    const method = editingTask ? 'PUT' : 'POST';
+
+    const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+    const response = await fetch(apiUrl, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': csrfToken,
+      },
+      body: JSON.stringify({ ...taskData, userID: user?.id }),
+    });
+
+    if (response.ok) {
+      alert('Task saved successfully');
+      onTaskSaved(taskData);
+    } else {
+      alert('Failed to save task');
+    }
+  } catch (error) {
+    alert('Error saving task:', error);
+  } finally {
+    handleClose();
+  }
+};
+
+
 
 
 

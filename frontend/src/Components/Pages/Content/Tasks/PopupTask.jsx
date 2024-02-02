@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { saveTask } from '../../../../Redux/taskSlice';
 
 const PopupTask = ({ show, handleClose, onTaskSaved, editingTask }) => {
   const [taskData, setTaskData] = useState({
@@ -8,7 +9,7 @@ const PopupTask = ({ show, handleClose, onTaskSaved, editingTask }) => {
     status: '',
     due_date: '',
   });
-  
+
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
@@ -22,44 +23,15 @@ const PopupTask = ({ show, handleClose, onTaskSaved, editingTask }) => {
     }
   }, [editingTask]);
 
-  const user = JSON.parse(sessionStorage.getItem('user'));
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setTaskData({ ...taskData, [name]: value });
   };
 
   const handleSaveTask = async () => {
-    try {
-      setIsSaving(true); // Set isSaving to true when starting to save
-
-      // Use different API endpoint for editing (PUT method)
-      const apiUrl = editingTask ? `http://127.0.0.1:8000/api/tasks/${editingTask.id}` : 'http://127.0.0.1:8000/api/tasks';
-      const method = editingTask ? 'PUT' : 'POST';
-
-      const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-      const response = await fetch(apiUrl, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': csrfToken,
-        },
-        body: JSON.stringify({ ...taskData, userID: user?.id }),
-      });
-
-      if (response.ok) {
-        alert('Task saved successfully');
-        onTaskSaved(taskData);
-        // Note: Don't close the modal here; it will be closed later based on isSaving state
-      } else {
-        alert('Failed to save task');
-      }
-    } catch (error) {
-      alert('Error saving task:', error);
-    } finally {
-      setIsSaving(false); // Set isSaving back to false after saving
-      handleClose(); // Close the modal here
-    }
+    setIsSaving(true);
+    await saveTask(taskData, editingTask, onTaskSaved, handleClose);
+    setIsSaving(false);
   };
 
   return (

@@ -46,10 +46,8 @@ export default function Task() {
 
   const handleTaskSaved = (newTask) => {
     if (editingTask) {
-      // Update existing task
       setTasks(tasks.map(task => (task.id === newTask.id ? newTask : task)));
     } else {
-      // Add new task
       setTasks([...tasks, newTask]);
     }
   
