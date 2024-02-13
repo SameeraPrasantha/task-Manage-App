@@ -29,7 +29,7 @@
 - Run php artisan migrate
 - Run php artisan serve
 
-- ##Frontend
+- ## Frontend
 - Go back folder open the terminal run these steps
 - npm install react-scripts --save
 
