@@ -18,3 +18,19 @@
 - Open Terminal (cmd, PowerShell)
 - type npm run start
 - All most done...
+
+## If you have some trouble cloning and running the software please do that.
+- ## Backend
+- Go back folder open the terminal run these steps
+- Run composer install on your cmd or terminal
+- Copy the .env.example file to .env on the root folder
+- Open your .env file and change the database name (DB_DATABASE) to whatever you have, the username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration
+- Run php artisan key:generate
+- Run php artisan migrate
+- Run php artisan serve
+
+- ##Frontend
+- Go back folder open the terminal run these steps
+- npm install react-scripts --save
+
+#Thank_you.!
