@@ -33,4 +33,4 @@
 - Go back folder open the terminal run these steps
 - npm install react-scripts --save
 
-#Thank_you.!
+# Thank you.!
